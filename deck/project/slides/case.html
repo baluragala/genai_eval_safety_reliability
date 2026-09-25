@@ -1,0 +1,26 @@
+<section id="case" data-transition="fade" style="background:#F6F4EF; color:#1B2530; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:48px">
+  <div style="display:flex; flex-direction:column; gap:16px">
+    <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; letter-spacing:3px; text-transform:uppercase; color:#B8471A">The running case</p>
+    <h2 style="font-size:64px; font-weight:600; line-height:1.15">Acme Outfitters' support agent</h2>
+  </div>
+  <div style="display:flex; gap:64px; flex:1">
+    <div style="flex:1; display:flex; flex-direction:column; gap:24px">
+      <p style="font-size:32px; line-height:1.45; color:#4A5563">An OpenAI tool-calling agent (<b>gpt-4o-mini</b>, temperature 0, seed 7) working a simulated retailer: 8 orders, 5 customers, a help centre, a payments ledger, an outbox and a human queue.</p>
+      <p style="font-size:32px; line-height:1.45; color:#4A5563">The model stays fixed all session, so every change in behaviour comes from the system we build around it.</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:16px">
+      <p style="font-size:24px; font-weight:600; color:#6B7682; text-transform:uppercase; letter-spacing:2px">Seven tools</p>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px">
+        <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:26px; background:#FFFDF8; border:1px solid #E2DDD2; border-radius:12px; padding:16px 20px">lookup_order</p>
+        <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:26px; background:#FFFDF8; border:1px solid #E2DDD2; border-radius:12px; padding:16px 20px">search_kb</p>
+        <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:26px; background:#FBE9DF; border:1px solid #E7B89C; border-radius:12px; padding:16px 20px">issue_refund</p>
+        <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:26px; background:#FBE9DF; border:1px solid #E7B89C; border-radius:12px; padding:16px 20px">send_email</p>
+        <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:26px; background:#FFFDF8; border:1px solid #E2DDD2; border-radius:12px; padding:16px 20px">remember · recall</p>
+        <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:26px; background:#FFFDF8; border:1px solid #E2DDD2; border-radius:12px; padding:16px 20px">escalate_to_human</p>
+      </div>
+      <p style="font-size:24px; color:#6B7682">Orange tools move money or data out of the company.</p>
+    </div>
+  </div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1664px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; color:#6B7682">run_agent(task, world, guards=…, executor=…, checkpointer=…, model=…)</p>
+  <aside>Introduce the one system everyone will test all session. The agent loop never changes. Evaluation, guards, reliability wrappers and checkpoints plug in through four parameters, shown in the footer. Point out the two high-impact tools: issue_refund and send_email. Most of today's risk sits in those two calls.</aside>
+</section>

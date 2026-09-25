@@ -1,0 +1,29 @@
+<section id="double-refund" data-transition="fade" style="background:#F6F4EF; color:#1B2530; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:48px">
+  <div style="display:flex; flex-direction:column; gap:16px">
+    <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; letter-spacing:3px; text-transform:uppercase; color:#B8471A">Crash, resume, double refund</p>
+    <h2 style="font-size:64px; font-weight:600; line-height:1.15">Replaying a write is how customers get paid twice</h2>
+  </div>
+  <div style="display:flex; gap:16px; align-items:stretch">
+    <div style="flex:1; display:flex; flex-direction:column; gap:12px; background:#FFFDF8; border:1px solid #E2DDD2; border-radius:16px; padding:28px">
+      <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; color:#B8471A">1</p>
+      <p style="font-size:28px; line-height:1.4">Model decides to refund. <b>Checkpoint saved.</b></p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:12px; background:#FFFDF8; border:1px solid #E2DDD2; border-radius:16px; padding:28px">
+      <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; color:#B8471A">2</p>
+      <p style="font-size:28px; line-height:1.4">Refund executes. <b>Money moves.</b></p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:12px; background:#16202A; color:#EDEAE3; border-radius:16px; padding:28px">
+      <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; color:#F0955E">3</p>
+      <p style="font-size:28px; line-height:1.4">Worker crashes before the result is saved.</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:12px; background:#FFFDF8; border:1px solid #E2DDD2; border-radius:16px; padding:28px">
+      <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; color:#B8471A">4</p>
+      <p style="font-size:28px; line-height:1.4">Resume replays the same tool call.</p>
+    </div>
+  </div>
+  <div style="display:flex; gap:32px">
+    <p style="flex:1; font-size:30px; line-height:1.4; background:#FBE9DF; border:1px solid #E7B89C; border-radius:16px; padding:28px">Without a key: <b>2 refunds</b> in the ledger</p>
+    <p style="flex:1; font-size:30px; line-height:1.4; background:#E4ECF4; border:1px solid #9FB6CE; border-radius:16px; padding:28px">Key = task + tool_call_id: <b>1 refund</b>, same result returned</p>
+  </div>
+  <aside>This is the most memorable demo of the block, and it is deterministic: FaultInjector with crash_after on issue_refund. The fix works because the checkpoint holds the assistant message with its tool_call id, so a replay carries the same id and therefore the same idempotency key. The payments service sees the key and returns the original result instead of paying again. The key is derived by the harness, never chosen by the model.</aside>
+</section>

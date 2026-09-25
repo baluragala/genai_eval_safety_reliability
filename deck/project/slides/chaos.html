@@ -1,0 +1,27 @@
+<section id="chaos" data-transition="fade" style="background:#F6F4EF; color:#1B2530; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:48px">
+  <div style="display:flex; flex-direction:column; gap:16px">
+    <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; letter-spacing:3px; text-transform:uppercase; color:#B8471A">Chaos experiment</p>
+    <h2 style="font-size:64px; font-weight:600; line-height:1.15">Turn up the fault rate and watch which configuration holds</h2>
+  </div>
+  <div style="display:flex; gap:48px; flex:1">
+    <div style="flex:1; display:flex; flex-direction:column; gap:20px">
+      <h3 style="font-size:40px; font-weight:600">The setup</h3>
+      <ul style="font-size:30px; line-height:1.55; color:#4A5563">
+        <li>Fault rates: 0%, 20%, 40% of tool calls</li>
+        <li>Configurations: unprotected, retry only, full stack</li>
+        <li>Seeded faults, so every run is reproducible</li>
+        <li>Measure success rate and latency</li>
+      </ul>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:20px">
+      <h3 style="font-size:40px; font-weight:600">What to look for</h3>
+      <ul style="font-size:30px; line-height:1.55; color:#4A5563">
+        <li>How fast each line falls as faults rise</li>
+        <li>Where retry-only still fails: writes it won't retry</li>
+        <li>Latency paid for resilience</li>
+        <li>Degraded outcomes that are honest, not faked</li>
+      </ul>
+    </div>
+  </div>
+  <aside>The numbers come from the live run. Do not predict them on the slide. Point out that success here means the oracle is satisfied, and a refund queued for a human is not the same as a refund issued. Ask whether the task definition should count honest degradation as success. That is a product decision, not an engineering one.</aside>
+</section>

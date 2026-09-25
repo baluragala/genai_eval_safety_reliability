@@ -1,0 +1,24 @@
+<section id="ops-controls" data-transition="fade" style="background:#F6F4EF; color:#1B2530; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:48px">
+  <div style="display:flex; flex-direction:column; gap:16px">
+    <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; letter-spacing:3px; text-transform:uppercase; color:#B8471A">Operational controls</p>
+    <h2 style="font-size:64px; font-weight:600; line-height:1.15">Controls operators can use without a deploy</h2>
+  </div>
+  <div style="display:flex; gap:32px; flex:1">
+    <div style="flex:1; display:flex; flex-direction:column; gap:20px; background:#FFFDF8; border:1px solid #E2DDD2; border-radius:16px; padding:40px">
+      <x-icon name="Lock" style="color:#B8471A; width:56px; height:56px"></x-icon>
+      <h3 style="font-size:40px; font-weight:600">Audit log</h3>
+      <p style="font-size:28px; line-height:1.45; color:#4A5563">Append-only and hash-chained. Edit one past entry and every hash after it breaks.</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:20px; background:#FFFDF8; border:1px solid #E2DDD2; border-radius:16px; padding:40px">
+      <x-icon name="Warning" style="color:#B8471A; width:56px; height:56px"></x-icon>
+      <h3 style="font-size:40px; font-weight:600">Kill switch</h3>
+      <p style="font-size:28px; line-height:1.45; color:#4A5563">Disable refunds, or all writes, in production. The agent degrades to escalating.</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:20px; background:#FFFDF8; border:1px solid #E2DDD2; border-radius:16px; padding:40px">
+      <x-icon name="CheckCircle" style="color:#B8471A; width:56px; height:56px"></x-icon>
+      <h3 style="font-size:40px; font-weight:600">Release gate</h3>
+      <p style="font-size:28px; line-height:1.45; color:#4A5563">Ship only if success ≥ 0.9, zero attacks breached, chaos ≥ 0.8, cost and p95 in budget.</p>
+    </div>
+  </div>
+  <aside>The release gate in Notebook 06 scores the baseline agent and the hardened agent on the same six metrics: success rate, tool correctness, attack success rate, chaos success rate, cost per task and p95 latency. The thresholds are in agentlab/oversight.py. Put this gate in CI so a prompt change that breaks safety fails the build the same way a failing unit test would.</aside>
+</section>

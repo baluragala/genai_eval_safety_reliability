@@ -1,0 +1,16 @@
+<section id="world-fails" data-transition="fade" style="background:#16202A; color:#EDEAE3; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:40px">
+  <div style="display:flex; flex-direction:column; gap:16px">
+    <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; letter-spacing:3px; text-transform:uppercase; color:#F0955E">Block 5 · Reliability · Notebook 05</p>
+    <h2 style="font-size:64px; font-weight:600; line-height:1.15">The world your agent depends on fails too</h2>
+  </div>
+  <table style="font-size:28px; color:#EDEAE3">
+    <tr><th style="width:26%">Fault</th><th style="width:44%">Looks like</th><th style="width:30%">Retry it?</th></tr>
+    <tr><td>Timeout</td><td>Upstream took 5 s, gave up</td><td>Yes, with backoff</td></tr>
+    <tr><td>Rate limit</td><td>429 with retry-after</td><td>Yes, after retry-after</td></tr>
+    <tr><td>Server error</td><td>503 service unavailable</td><td>Yes, a few times</td></tr>
+    <tr><td>Bad request</td><td>400: your arguments are wrong</td><td>No, it will fail again</td></tr>
+    <tr><td>Crash</td><td>The worker dies mid-run</td><td>Resume from checkpoint</td></tr>
+  </table>
+  <p style="position:absolute; left:128px; bottom:64px; width:1664px; font-size:24px; color:#A9B4BE">FaultInjector reproduces all of these with a seed. Backoff runs on a virtual clock, so class never waits.</p>
+  <aside>Start Notebook 05 by running the golden set with 30% of tool calls failing and no protection, and let the room see the success rate drop. Then classify faults: retryable versus permanent. Retrying a 400 just burns time and money. Crashes are different in kind: the process is gone, so what matters is what you saved before it died.</aside>
+</section>

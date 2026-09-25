@@ -1,0 +1,13 @@
+<section id="gallery" data-transition="fade" style="background:#F6F4EF; color:#1B2530; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:40px">
+  <div style="display:flex; flex-direction:column; gap:16px">
+    <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; letter-spacing:3px; text-transform:uppercase; color:#B8471A">Guided analysis</p>
+    <h2 style="font-size:64px; font-weight:600; line-height:1.15">Trace D: same shape as the healthy one. What broke?</h2>
+  </div>
+  <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:28px; line-height:1.6; background:#16202A; color:#D5DCE2; border-radius:16px; padding:36px">🔧 lookup_order(A-1001) → total: 129.0 · total_cents: 12900<br>🔧 search_kb("refund policy") → KB-01<br>🔧 issue_refund(A-1001, <span style="color:#F0955E">amount=12900</span>) → SUCCEEDED<br>💬 "I've processed your refund for order A-1001."</p>
+  <div style="display:flex; gap:24px">
+    <p style="font-size:28px; background:#FFFDF8; border:1px solid #E2DDD2; border-radius:999px; padding:12px 28px">A · B · C · D · E</p>
+    <p style="font-size:28px; color:#4A5563; padding:12px 0">Classify all five before the reveal. Then write the detector that would have caught it.</p>
+  </div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1664px; font-size:24px; color:#6B7682">The gallery traces were built by hand, one per class. The live section shows what the real model does.</p>
+  <aside>Answer for D: tool misuse, a unit confusion that refunded $12,900 instead of $129. Full key: A reasoning (refunded a final-sale item), B planning (refunded before looking up, used the customer's claimed amount), C infinite loop (retries a timing-out lookup until the step limit), D tool misuse, E silent failure (gateway declined, reply claims success). Give learners two minutes to vote before revealing.</aside>
+</section>

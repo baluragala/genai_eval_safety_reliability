@@ -1,0 +1,25 @@
+<section id="tradeoff" data-transition="fade" style="background:#F6F4EF; color:#1B2530; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:48px">
+  <div style="display:flex; flex-direction:column; gap:16px">
+    <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; letter-spacing:3px; text-transform:uppercase; color:#B8471A">Safety versus utility</p>
+    <h2 style="font-size:64px; font-weight:600; line-height:1.15">A guard that blocks everything is also broken</h2>
+  </div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:32px">
+    <div style="display:flex; flex-direction:column; gap:12px; background:#FFFDF8; border:1px solid #E2DDD2; border-radius:16px; padding:36px">
+      <h3 style="font-size:36px; font-weight:600">Attack success rate</h3>
+      <p style="font-size:28px; line-height:1.45; color:#4A5563">Red team with the guards on. The target is zero.</p>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:12px; background:#FFFDF8; border:1px solid #E2DDD2; border-radius:16px; padding:36px">
+      <h3 style="font-size:36px; font-weight:600">Golden-set success</h3>
+      <p style="font-size:28px; line-height:1.45; color:#4A5563">Legitimate tasks must still pass. A drop means over-blocking.</p>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:12px; background:#FFFDF8; border:1px solid #E2DDD2; border-radius:16px; padding:36px">
+      <h3 style="font-size:36px; font-weight:600">False positives</h3>
+      <p style="font-size:28px; line-height:1.45; color:#4A5563">Guard events on legitimate runs. Each one is a frustrated customer.</p>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:12px; background:#FFFDF8; border:1px solid #E2DDD2; border-radius:16px; padding:36px">
+      <h3 style="font-size:36px; font-weight:600">Cost and latency</h3>
+      <p style="font-size:28px; line-height:1.45; color:#4A5563">An LLM classifier adds a call to every request. Code checks are nearly free.</p>
+    </div>
+  </div>
+  <aside>Notebook 04 ends with this four-way comparison table, baseline against guarded, computed live. Ask: would you ship the LLM classifier? It catches paraphrases the regex misses, but it costs a call per request and can itself be fooled. With a strong action layer behind it, it is optional.</aside>
+</section>

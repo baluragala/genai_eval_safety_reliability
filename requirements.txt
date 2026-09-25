@@ -1,0 +1,9 @@
+# Learners (Colab already has pandas/matplotlib; the setup cell installs openai if missing)
+openai>=1.40
+pandas>=2.0
+matplotlib>=3.7
+# Maintainers: build + test the notebooks
+nbformat>=5.10
+nbclient>=0.10
+ipykernel>=6.29
+pytest>=8.0

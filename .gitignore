@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+.nbrun/
+.env
+.ipynb_checkpoints/
+reference_runs/agentlab/
+.pytest_cache/

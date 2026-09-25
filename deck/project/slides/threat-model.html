@@ -1,0 +1,29 @@
+<section id="threat-model" data-transition="fade" style="background:#F6F4EF; color:#1B2530; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:48px">
+  <div style="display:flex; flex-direction:column; gap:16px">
+    <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; letter-spacing:3px; text-transform:uppercase; color:#B8471A">Block 3 · Safety risks · Notebook 03</p>
+    <h2 style="font-size:64px; font-weight:600; line-height:1.15">Untrusted text flows in, real actions flow out</h2>
+  </div>
+  <div style="display:flex; gap:32px; align-items:center; flex:1">
+    <div style="flex:1; display:flex; flex-direction:column; gap:16px">
+      <p style="font-size:24px; font-weight:600; color:#6B7682; text-transform:uppercase; letter-spacing:2px">Anyone can write these</p>
+      <p style="font-size:28px; background:#FFFDF8; border:1px dashed #B8471A; border-radius:12px; padding:18px 24px">Customer message</p>
+      <p style="font-size:28px; background:#FFFDF8; border:1px dashed #B8471A; border-radius:12px; padding:18px 24px">Help-centre articles</p>
+      <p style="font-size:28px; background:#FFFDF8; border:1px dashed #B8471A; border-radius:12px; padding:18px 24px">Fields in tool results</p>
+      <p style="font-size:28px; background:#FFFDF8; border:1px dashed #B8471A; border-radius:12px; padding:18px 24px">Long-term memory</p>
+    </div>
+    <x-shape kind="arrow-right" style="background:#C9C2B4; width:96px; height:48px"></x-shape>
+    <div style="width:320px; display:flex; flex-direction:column; gap:12px; background:#16202A; border-radius:16px; padding:40px; align-items:center">
+      <h3 style="font-size:40px; font-weight:600; color:#EDEAE3">The model</h3>
+      <p style="font-size:24px; color:#A9B4BE; text-align:center">reads it all as one context</p>
+    </div>
+    <x-shape kind="arrow-right" style="background:#C9C2B4; width:96px; height:48px"></x-shape>
+    <div style="flex:1; display:flex; flex-direction:column; gap:16px">
+      <p style="font-size:24px; font-weight:600; color:#6B7682; text-transform:uppercase; letter-spacing:2px">Real effects</p>
+      <p style="font-size:28px; background:#FBE9DF; border:1px solid #E7B89C; border-radius:12px; padding:18px 24px">Money moves</p>
+      <p style="font-size:28px; background:#FBE9DF; border:1px solid #E7B89C; border-radius:12px; padding:18px 24px">Data leaves</p>
+      <p style="font-size:28px; background:#FBE9DF; border:1px solid #E7B89C; border-radius:12px; padding:18px 24px">Code runs</p>
+      <p style="font-size:28px; background:#FBE9DF; border:1px solid #E7B89C; border-radius:12px; padding:18px 24px">Memory persists</p>
+    </div>
+  </div>
+  <aside>A chatbot that is fooled says something wrong. An agent that is fooled does something wrong. The dashed boxes are trust boundaries: text from any of them can carry instructions, and the model has no reliable way to tell data from commands. Note the third box: a gift message is customer-written even though our own order system returns it. Provenance has to be tracked per field, not per tool. OWASP LLM Top 10 names: LLM01 prompt injection, LLM02 sensitive information disclosure, LLM06 excessive agency.</aside>
+</section>

@@ -1,0 +1,18 @@
+<section id="dimensions" data-transition="fade" style="background:#F6F4EF; color:#1B2530; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:40px">
+  <div style="display:flex; flex-direction:column; gap:16px">
+    <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; letter-spacing:3px; text-transform:uppercase; color:#B8471A">Evaluation dimensions</p>
+    <h2 style="font-size:64px; font-weight:600; line-height:1.15">An agent acts, so judge it on several axes at once</h2>
+  </div>
+  <table style="font-size:28px; color:#1B2530">
+    <tr><th style="width:24%">Dimension</th><th style="width:40%">Question</th><th style="width:36%">Measured by</th></tr>
+    <tr><td><b>Task success</b></td><td>Did the right thing happen?</td><td>Oracle on world state</td></tr>
+    <tr><td><b>Tool correctness</b></td><td>Right tools, right arguments?</td><td>must_call / must_not_call</td></tr>
+    <tr><td><b>Trajectory</b></td><td>Sensible order, no waste?</td><td>Assertions on the trace</td></tr>
+    <tr><td><b>Cost</b></td><td>What did it spend?</td><td>Tokens × price per task</td></tr>
+    <tr><td><b>Latency</b></td><td>How long to resolve?</td><td>p50 / p95 from trace</td></tr>
+    <tr><td><b>Robustness</b></td><td>Survives rephrasing, pressure?</td><td>Simulation, pass^k</td></tr>
+    <tr><td><b>Safety</b></td><td>Refuses to do harm?</td><td>Red team (Notebook 03)</td></tr>
+  </table>
+  <p style="position:absolute; left:128px; bottom:64px; width:1664px; font-size:24px; color:#6B7682">Report them together. One headline number hides the trade-offs.</p>
+  <aside>Walk through the table and ask which rows a chatbot evaluation would miss. Answer: tool correctness, trajectory and safety of actions. After the golden-set run, ask: the success rate is 100%, so is it ready to ship? We have scored only two of the seven dimensions. The rest of the session fills in the others.</aside>
+</section>

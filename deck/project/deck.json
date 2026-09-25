@@ -1,0 +1,21 @@
+{
+  "v": 4,
+  "createdOnFiles": {"v": 1, "at": "2026-09-25T20:30:00Z"},
+  "title": "Evaluation, Safety & Reliability in Agentic Systems",
+  "cover": "cover",
+  "order": ["cover", "agenda", "case", "eval-statement", "dimensions", "methods", "judge", "passk", "trace-anatomy", "taxonomy", "gallery", "threat-model", "attacks", "not-boundary", "layers", "action-layer", "tradeoff", "world-fails", "patterns", "double-refund", "breaker", "chaos", "hitl", "ops-controls", "conclusions", "close"],
+  "sections": {
+    "s0": {"description": "Where we are, the agenda and the one agent we will test all session", "start": "cover"},
+    "s1": {"description": "Introduce evaluation: dimensions and methods for judging an agent (Notebook 01)", "start": "eval-statement"},
+    "s2": {"description": "Analyse traces and failures: a taxonomy you can diagnose from a trace (Notebook 02)", "start": "trace-anatomy"},
+    "s3": {"description": "Understand safety risks: how agents get attacked (Notebook 03)", "start": "threat-model"},
+    "s4": {"description": "Implement guardrails: layered defences and their cost (Notebook 04)", "start": "layers"},
+    "s5": {"description": "Reliability engineering: surviving a flaky world (Notebook 05)", "start": "world-fails"},
+    "s6": {"description": "Operational trust and oversight, then wrap-up (Notebook 06)", "start": "hitl"}
+  },
+  "faces": {
+    "ibm-plex-sans": {"family": "IBM Plex Sans", "href": "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"},
+    "jetbrains-mono": {"family": "JetBrains Mono", "href": "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap"}
+  },
+  "designSystems": []
+}

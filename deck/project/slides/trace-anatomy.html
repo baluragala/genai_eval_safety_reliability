@@ -1,0 +1,9 @@
+<section id="trace-anatomy" data-transition="fade" data-section="Analyse traces and failures" style="background:#16202A; color:#EDEAE3; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:40px">
+  <div style="display:flex; flex-direction:column; gap:16px">
+    <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; letter-spacing:3px; text-transform:uppercase; color:#F0955E">Block 2 · Traces &amp; failures · Notebook 02</p>
+    <h2 style="font-size:64px; font-weight:600; line-height:1.15">A trace is the agent's flight recorder</h2>
+  </div>
+  <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:28px; line-height:1.6; background:#0F171F; border:1px solid #2C3A47; border-radius:16px; padding:36px; color:#D5DCE2">🧠 llm   → recall(C-100)<br>🔧 recall → notes: []<br>🧠 llm   → lookup_order(A-1001)<br>🔧 lookup_order → delivered 5 days ago · $129.00 · final_sale: false<br>🧠 llm   → search_kb("refund policy")<br>🔧 issue_refund(A-1001, 129.0) → <span style="color:#F0955E">SUCCEEDED R-0001</span><br>💬 final → "I've refunded $129.00 for order A-1001…"</p>
+  <p style="font-size:32px; line-height:1.4; color:#A9B4BE">For each step ask: <b style="color:#EDEAE3">why</b> this step, was it <b style="color:#EDEAE3">right</b>, and what did it <b style="color:#EDEAE3">cost</b>?</p>
+  <aside>This is the healthy trace from the gallery, slightly condensed: the search_kb result line is left out. Every step records its tokens, cost and latency too. Emphasise the three questions. Debugging an agent means localising the failure to one step and one component: the model's reasoning, its plan, a tool, or the harness.</aside>
+</section>

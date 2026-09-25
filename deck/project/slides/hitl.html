@@ -1,0 +1,20 @@
+<section id="hitl" data-transition="fade" style="background:#F6F4EF; color:#1B2530; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:40px">
+  <div style="display:flex; flex-direction:column; gap:16px">
+    <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; letter-spacing:3px; text-transform:uppercase; color:#B8471A">Block 6 · Oversight · Notebook 06</p>
+    <h2 style="font-size:64px; font-weight:600; line-height:1.15">Match human oversight to the risk of the action</h2>
+  </div>
+  <table style="font-size:28px; color:#1B2530">
+    <tr><th style="width:18%">Mode</th><th style="width:44%">What happens</th><th style="width:38%">Example here</th></tr>
+    <tr><td><b>Auto</b></td><td>Agent acts; the action is logged</td><td>Look up an order</td></tr>
+    <tr><td><b>Notify</b></td><td>Agent acts; a human is told and can undo</td><td>Small refund, $150 or under</td></tr>
+    <tr><td><b>Approve</b></td><td>Run pauses until a human decides</td><td>Refund over $150, email out</td></tr>
+    <tr><td><b>Block</b></td><td>Never allowed from this agent</td><td>Code execution</td></tr>
+  </table>
+  <div style="display:flex; gap:24px">
+    <p style="font-size:28px; background:#E4ECF4; border:1px solid #9FB6CE; border-radius:999px; padding:12px 28px">approve</p>
+    <p style="font-size:28px; background:#FBE9DF; border:1px solid #E7B89C; border-radius:999px; padding:12px 28px">reject</p>
+    <p style="font-size:28px; background:#FFFDF8; border:1px solid #E2DDD2; border-radius:999px; padding:12px 28px">edit the arguments</p>
+    <p style="font-size:28px; color:#4A5563; padding:12px 0">then resume the same run</p>
+  </div>
+  <aside>Demo: ApprovalGate with a $150 limit on T07 ($210). The run pauses with status awaiting_approval and the pending call visible. Resume it three ways in fresh worlds: approve, reject, and edit the amount to a partial refund. When editing, check whether the agent reports the edited amount; if not, that is a silent failure in the reply. The same pattern exists as LangGraph interrupt with Command(resume=…) and human review in the OpenAI Agents SDK.</aside>
+</section>

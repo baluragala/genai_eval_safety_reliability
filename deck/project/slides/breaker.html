@@ -1,0 +1,30 @@
+<section id="breaker" data-transition="fade" style="background:#F6F4EF; color:#1B2530; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:48px">
+  <div style="display:flex; flex-direction:column; gap:16px">
+    <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; letter-spacing:3px; text-transform:uppercase; color:#B8471A">Circuit breaker</p>
+    <h2 style="font-size:64px; font-weight:600; line-height:1.15">Stop calling a dependency that is down</h2>
+  </div>
+  <div style="display:flex; gap:24px; align-items:center">
+    <div style="flex:1; display:flex; flex-direction:column; gap:12px; background:#E4ECF4; border:2px solid #2F5D8C; border-radius:24px; padding:32px">
+      <h3 style="font-size:40px; font-weight:600; color:#2F5D8C">Closed</h3>
+      <p style="font-size:28px; line-height:1.4; color:#4A5563">Calls pass through. Failures are counted.</p>
+    </div>
+    <div style="width:180px; display:flex; flex-direction:column; gap:8px; align-items:center">
+      <x-shape kind="arrow-right" style="background:#B8471A; width:120px; height:56px"></x-shape>
+      <p style="font-size:24px; color:#4A5563; text-align:center">3 failures</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:12px; background:#FBE9DF; border:2px solid #B8471A; border-radius:24px; padding:32px">
+      <h3 style="font-size:40px; font-weight:600; color:#B8471A">Open</h3>
+      <p style="font-size:28px; line-height:1.4; color:#4A5563">Fail fast. No calls reach the dependency.</p>
+    </div>
+    <div style="width:180px; display:flex; flex-direction:column; gap:8px; align-items:center">
+      <x-shape kind="arrow-right" style="background:#B8471A; width:120px; height:56px"></x-shape>
+      <p style="font-size:24px; color:#4A5563; text-align:center">cooldown</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:12px; background:#FFFDF8; border:2px dashed #6B7682; border-radius:24px; padding:32px">
+      <h3 style="font-size:40px; font-weight:600">Half-open</h3>
+      <p style="font-size:28px; line-height:1.4; color:#4A5563">One trial call. Success closes, failure re-opens.</p>
+    </div>
+  </div>
+  <p style="font-size:32px; line-height:1.4; color:#4A5563">Retries alone multiply the load on a dead service. The breaker turns a slow failure into a fast one, which the fallback can then handle.</p>
+  <aside>In the notebook, one shared breaker protects the orders database while five customers hit an outage. Compare how many calls reach the dead database with retry only versus retry plus breaker; the notebook counts them live. Then the fallback serves order status from a read replica, labelled as possibly stale, and refunds are queued for a human instead of failing.</aside>
+</section>

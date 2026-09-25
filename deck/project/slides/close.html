@@ -1,0 +1,30 @@
+<section id="close" data-transition="fade" style="background:#F6F4EF; color:#1B2530; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px; display:flex; flex-direction:column; gap:48px">
+  <div style="display:flex; flex-direction:column; gap:16px">
+    <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; letter-spacing:3px; text-transform:uppercase; color:#B8471A">Q&amp;A · Additional readings</p>
+    <h2 style="font-size:64px; font-weight:600; line-height:1.15">Questions, then keep going</h2>
+  </div>
+  <div style="display:flex; gap:64px; flex:1">
+    <div style="flex:1; display:flex; flex-direction:column; gap:20px">
+      <h3 style="font-size:36px; font-weight:600">Readings</h3>
+      <ul style="font-size:28px; line-height:1.6; color:#4A5563">
+        <li>OpenAI API: Guardrails and human review</li>
+        <li>OpenAI API: Sandbox Agents</li>
+        <li>OpenAI API: Evaluate agent workflows</li>
+        <li>LangChain docs: Test</li>
+        <li>LangChain docs: Fault tolerance</li>
+        <li>Google Cloud: What Is Human In The Loop</li>
+      </ul>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:20px">
+      <h3 style="font-size:36px; font-weight:600">Take-home</h3>
+      <ul style="font-size:28px; line-height:1.6; color:#4A5563">
+        <li>Add five golden tasks and re-score</li>
+        <li>Write a new attack and the guard that stops it</li>
+        <li>Run chaos with crash faults</li>
+        <li>Design an escalation matrix for your domain</li>
+      </ul>
+      <p style="font-size:24px; color:#6B7682">Full list with solutions: teaching/exercises.md</p>
+    </div>
+  </div>
+  <aside>Open the floor. Questions that usually come up: how to build a golden set when there is no clear oracle (use human labels, then calibrate a judge against them); whether guardrails belong in the agent framework or a gateway (both; action checks sit closest to the tool); and how to monitor in production (sample traces, run detectors and the judge offline, alert on guard-event rates).</aside>
+</section>

@@ -1,0 +1,18 @@
+<section id="patterns" data-transition="fade" style="background:#F6F4EF; color:#1B2530; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:40px">
+  <div style="display:flex; flex-direction:column; gap:16px">
+    <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; letter-spacing:3px; text-transform:uppercase; color:#B8471A">Reliability patterns</p>
+    <h2 style="font-size:64px; font-weight:600; line-height:1.15">Seven patterns, stacked like middleware</h2>
+  </div>
+  <table style="font-size:26px; color:#1B2530">
+    <tr><th style="width:28%">Pattern</th><th style="width:36%">Protects against</th><th style="width:36%">Watch out for</th></tr>
+    <tr><td><b>Retry + backoff + jitter</b></td><td>Transient faults</td><td>Retrying writes, retry storms</td></tr>
+    <tr><td><b>Idempotency keys</b></td><td>Duplicate side effects</td><td>Keys must be stable on replay</td></tr>
+    <tr><td><b>Checkpointing</b></td><td>Crashes mid-run</td><td>Save after every step</td></tr>
+    <tr><td><b>Circuit breaker</b></td><td>Hammering a dead dependency</td><td>Tune threshold and cooldown</td></tr>
+    <tr><td><b>Fallback</b></td><td>A dependency being down</td><td>Label degraded data as such</td></tr>
+    <tr><td><b>Graceful degradation</b></td><td>Losing a capability</td><td>Queue it; never fake success</td></tr>
+    <tr><td><b>Budgets</b></td><td>Loops, runaway spend</td><td>Steps, dollars, repeated calls</td></tr>
+  </table>
+  <p style="position:absolute; left:128px; bottom:64px; width:1664px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; color:#6B7682">with_fallback(with_retry(with_breakers(idempotent(tool))))</p>
+  <aside>Every wrapper has the same signature, so they compose, as in the footer. Order matters. The breaker sits inside retry so it can count every failed attempt and fail fast once open; idempotency sits innermost so every attempt carries the key. In LangGraph the same ideas appear as RetryPolicy on nodes, checkpointers for durable execution, and interrupt for human steps.</aside>
+</section>

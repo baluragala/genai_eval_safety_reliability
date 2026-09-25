@@ -1,0 +1,29 @@
+<section id="layers" data-transition="fade" style="background:#F6F4EF; color:#1B2530; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:40px">
+  <div style="display:flex; flex-direction:column; gap:16px">
+    <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; letter-spacing:3px; text-transform:uppercase; color:#B8471A">Block 4 · Guardrails · Notebook 04</p>
+    <h2 style="font-size:64px; font-weight:600; line-height:1.15">Defence in depth: five layers, one of them carries the load</h2>
+  </div>
+  <div style="display:flex; flex-direction:column">
+    <div style="display:flex; gap:32px; align-items:center; background:#FFFDF8; border:1px solid #E2DDD2; padding:22px 32px">
+      <p style="font-size:30px; font-weight:600; width:260px">Input</p>
+      <p style="font-size:28px; color:#4A5563">Regex screen, LLM injection classifier: catches the obvious</p>
+    </div>
+    <div style="display:flex; gap:32px; align-items:center; background:#FFFDF8; border:1px solid #E2DDD2; border-top:none; padding:22px 32px">
+      <p style="font-size:30px; font-weight:600; width:260px">Context</p>
+      <p style="font-size:28px; color:#4A5563">Spotlighting: wrap untrusted content, mark it as data</p>
+    </div>
+    <div style="display:flex; gap:32px; align-items:center; background:#FBE9DF; border:2px solid #B8471A; padding:22px 32px">
+      <p style="font-size:30px; font-weight:600; width:260px; color:#B8471A">Action</p>
+      <p style="font-size:28px; color:#1B2530">Allowlist, sandbox, refund policy, egress, memory rules. <b>Holds even when the model is fooled</b></p>
+    </div>
+    <div style="display:flex; gap:32px; align-items:center; background:#FFFDF8; border:1px solid #E2DDD2; padding:22px 32px">
+      <p style="font-size:30px; font-weight:600; width:260px">Oversight</p>
+      <p style="font-size:28px; color:#4A5563">Approval gate: a human signs off on high-impact actions</p>
+    </div>
+    <div style="display:flex; gap:32px; align-items:center; background:#FFFDF8; border:1px solid #E2DDD2; border-top:none; padding:22px 32px">
+      <p style="font-size:30px; font-weight:600; width:260px">Output</p>
+      <p style="font-size:28px; color:#4A5563">Redact secrets and other customers' data from replies</p>
+    </div>
+  </div>
+  <aside>In Notebook 04 learners add these one layer at a time and re-run the red team after each, watching the scoreboard. Show the regex bypass: a polite rewrite of ATK-01 with no trigger phrases. Input filters are whack-a-mole. Spotlighting reduces risk but the model can still choose to follow the text. The action layer checks every side-effecting call against the system of record, so it doesn't depend on what the model believes.</aside>
+</section>

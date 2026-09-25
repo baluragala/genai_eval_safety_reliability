@@ -1,0 +1,25 @@
+<section id="judge" data-transition="fade" style="background:#F6F4EF; color:#1B2530; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:48px">
+  <div style="display:flex; flex-direction:column; gap:16px">
+    <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; letter-spacing:3px; text-transform:uppercase; color:#B8471A">LLM-as-judge</p>
+    <h2 style="font-size:64px; font-weight:600; line-height:1.15">The judge is a model too, so evaluate it</h2>
+  </div>
+  <div style="display:flex; gap:48px; flex:1">
+    <div style="flex:1; display:flex; flex-direction:column; gap:24px">
+      <p style="font-size:24px; font-weight:600; color:#6B7682; text-transform:uppercase; letter-spacing:2px">The reply</p>
+      <p style="font-size:32px; line-height:1.4; background:#FFFDF8; border:1px solid #E2DDD2; border-radius:16px; padding:32px">"Great news, your refund of $210.00 for A-1008 has been processed!"</p>
+      <p style="font-size:24px; font-weight:600; color:#6B7682; text-transform:uppercase; letter-spacing:2px">The trace</p>
+      <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:26px; line-height:1.5; background:#16202A; color:#EDEAE3; border-radius:16px; padding:32px">issue_refund(A-1008, 210.0)<br>→ state: <span style="color:#F0955E">GW_DECLINED</span>, refund_id: null</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:24px">
+      <h3 style="font-size:40px; font-weight:600">Judge hygiene</h3>
+      <ul style="font-size:30px; line-height:1.5; color:#4A5563">
+        <li>Give it the evidence: the trace, not only the reply</li>
+        <li>A fixed rubric with anchored 1–5 scores, returned as JSON</li>
+        <li>Calibrate against trusted labels: agreement, Cohen's κ</li>
+        <li>Watch false passes: bad runs it approves</li>
+        <li>Re-calibrate whenever you change the judge</li>
+      </ul>
+    </div>
+  </div>
+  <aside>This example is gallery trace E from Notebook 02, which was constructed by hand. A judge that sees only the reply has no way to know the refund failed; the text reads perfectly. In the notebook, the same judge grades every case twice, reply-only and with the trace, and both are compared against the oracle. Let the live numbers speak. The false-pass count is the one to watch, because a false pass means a bad run approved.</aside>
+</section>

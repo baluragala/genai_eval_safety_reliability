@@ -1,0 +1,16 @@
+<section id="taxonomy" data-transition="fade" style="background:#F6F4EF; color:#1B2530; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:40px">
+  <div style="display:flex; flex-direction:column; gap:16px">
+    <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; letter-spacing:3px; text-transform:uppercase; color:#B8471A">Failure taxonomy</p>
+    <h2 style="font-size:64px; font-weight:600; line-height:1.15">Five failures, each with its own signature in the trace</h2>
+  </div>
+  <table style="font-size:27px; color:#1B2530">
+    <tr><th style="width:22%">Failure</th><th style="width:44%">What the trace shows</th><th style="width:34%">Fix it in</th></tr>
+    <tr><td><b>Reasoning</b></td><td>Right data retrieved, wrong conclusion drawn</td><td>Prompt, policy in code</td></tr>
+    <tr><td><b>Planning</b></td><td>Steps skipped or out of order: acts before verifying</td><td>Plan checks, preconditions</td></tr>
+    <tr><td><b>Infinite loop</b></td><td>Same call, same args, again and again</td><td>Loop guard, step budget</td></tr>
+    <tr><td><b>Tool misuse</b></td><td>Wrong args, units or tool: 12900 for $129</td><td>Schemas, arg validation</td></tr>
+    <tr><td><b>Silent failure</b></td><td>Every step green, outcome wrong, reply claims success</td><td>Check results, oracle</td></tr>
+  </table>
+  <p style="position:absolute; left:128px; bottom:64px; width:1664px; font-size:24px; color:#6B7682">Notebook 02 builds one detector per row and runs them over every trace.</p>
+  <aside>Silent failures are the most dangerous: no error, no alert, a happy customer message, and no money moved. Loops are the most expensive. Ask learners which of the five their own past projects have hit. In the notebook, diagnose() runs the detectors in cause order, so the earliest cause wins when a trace shows more than one symptom.</aside>
+</section>

@@ -1,0 +1,23 @@
+<section id="passk" data-transition="fade" style="background:#F6F4EF; color:#1B2530; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:48px">
+  <div style="display:flex; flex-direction:column; gap:16px">
+    <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; letter-spacing:3px; text-transform:uppercase; color:#B8471A">Consistency</p>
+    <h2 style="font-size:64px; font-weight:600; line-height:1.15">pass@k asks "ever?". pass^k asks "every time?"</h2>
+  </div>
+  <div style="display:flex; gap:32px">
+    <div style="flex:1; display:flex; flex-direction:column; gap:16px; background:#FFFDF8; border:1px solid #E2DDD2; border-radius:16px; padding:40px">
+      <h3 style="font-size:40px; font-weight:600">pass@k</h3>
+      <p style="font-size:30px; line-height:1.45; color:#4A5563">Chance that <b>at least one</b> of k tries succeeds. Fits code generation, where you keep the best attempt.</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:16px; background:#FFFDF8; border:1px solid #E2DDD2; border-radius:16px; padding:40px">
+      <h3 style="font-size:40px; font-weight:600; color:#B8471A">pass^k</h3>
+      <p style="font-size:30px; line-height:1.45; color:#4A5563">Chance that <b>all</b> k tries succeed. Fits agents that act for real customers: they need it right every time.</p>
+    </div>
+  </div>
+  <div style="display:flex; gap:32px; align-items:baseline">
+    <p style="font-size:32px; color:#4A5563">Worked example: 3 of 4 runs succeed →</p>
+    <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:32px">pass@2 = 1.00</p>
+    <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:32px; color:#B8471A">pass^2 = 0.50</p>
+    <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:32px; color:#B8471A">pass^4 = 0.00</p>
+  </div>
+  <aside>The worked example is pure arithmetic: pass^2 is C(3,2)/C(4,2) = 3/6. The same 75% single-run success looks perfect as pass@2 and fails outright as pass^4. In the notebook we run T02 and T03 four times at temperature 1.0 and compute both. Temperature 0 hides this variance, but production systems often run hotter, and customers retry.</aside>
+</section>
