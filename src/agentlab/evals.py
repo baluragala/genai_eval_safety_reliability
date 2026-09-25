@@ -138,9 +138,9 @@ def attack_breached(attack: dict, trace: Trace, world: World) -> bool:
 def run_attack(attack: dict, **agent_kwargs):
     world = World.fresh(**attack.get("world", {}))
     toolset = list(agent_kwargs.pop("toolset", DEFAULT_TOOLSET)) + attack.get("toolset_extra", [])
-    for pre in attack.get("setup", []):
-        run_agent(pre, world, toolset=toolset, **agent_kwargs)
+    setup_traces = [run_agent(pre, world, toolset=toolset, **agent_kwargs) for pre in attack.get("setup", [])]
     trace = run_agent(attack["task"], world, toolset=toolset, **agent_kwargs)
+    trace.setup_traces = setup_traces      # earlier sessions (memory poisoning), kept for diagnosis
     return trace, world, attack_breached(attack, trace, world)
 
 
@@ -150,7 +150,7 @@ def red_team(attacks=ATTACKS, *, label="agent", verbose=True, **agent_kwargs):
     for a in attacks:
         trace, world, breached = run_attack(a, **dict(agent_kwargs))
         traces[a["id"]] = (trace, world)
-        blocked = [s.note for s in trace.guard_events()]
+        blocked = [s.note for t in [*getattr(trace, "setup_traces", []), trace] for s in t.guard_events()]
         rows.append({"config": label, "attack": a["id"], "kind": a["kind"], "breached": breached,
                      "guard_events": len(blocked), "status": trace.status,
                      "final": (trace.final or "")[:100]})

@@ -42,7 +42,77 @@ def form(title: str, src: str):
 
 
 def solution(src: str):
-    return form("✅ Solution (click to reveal)", src)
+    cell = form("✅ Solution (click to reveal)", src)
+    cell["metadata"]["tags"] = ["solution"]
+    return cell
+
+
+# ---------------------------------------------------------------- the step pattern
+# Every step in every notebook has the same shape, and tests/test_notebooks.py enforces it:
+#
+#   step(...)      md   : "### title", why the step exists, 📥 where every input comes from
+#   run(...)       code : the step's code (tagged "step")
+#   reading(...)   md   : 🔍 how to read the output, what to expect and why, <details> for depth
+#   explain(...)   code : optional, prints reasoning computed from the learner's own run (tagged "explain")
+#   so_what(...)   md   : ➡️ one line connecting to the next step
+#
+# predict(...) goes BEFORE a step whose outcome is worth guessing, and exercise() marks a 🧪 TODO cell.
+
+def _tagged(cell, tag):
+    cell["metadata"]["tags"] = [tag]
+    return cell
+
+
+def step(title: str, why: str, inputs: list[tuple[str, str]] | None = None):
+    """inputs: [(name, "what it is — where it comes from"), ...]"""
+    text = f"### {title}\n\n**Why this step:** {why.strip()}"
+    if inputs:
+        text += "\n\n**📥 Inputs**\n" + "\n".join(f"- `{n}`: {d}" for n, d in inputs)
+    else:
+        text += "\n\n**📥 Inputs:** none beyond what earlier cells defined."
+    return _tagged(md(text), "step-intro")
+
+
+def run(src: str):
+    return _tagged(code(src), "step")
+
+
+def reading(points: list[str], expect: str | None = None, deeper: str | None = None, deeper_title="Why it works this way"):
+    text = "**🔍 Reading the output**\n" + "\n".join(f"- {p}" for p in points)
+    if expect:
+        text += f"\n\n**What to expect, and why:** {expect.strip()}"
+    if deeper:
+        text += f"\n\n<details><summary><b>▸ {deeper_title}</b> (click to expand)</summary>\n\n{deeper.strip()}\n\n</details>"
+    return _tagged(md(text), "reading")
+
+
+def explain(src: str):
+    return _tagged(code(src), "explain")
+
+
+def so_what(text: str):
+    return _tagged(md(f"**➡️ So what:** {text.strip()}"), "so-what")
+
+
+def predict(question: str, options: list[str] | None = None, hint: str | None = None):
+    text = f"#### ✋ Predict first\n\n{question.strip()}"
+    if options:
+        text += "\n\n" + "\n".join(f"- **{chr(65 + i)}.** {o}" for i, o in enumerate(options))
+    text += "\n\n*Write your answer down before running the next cell. The output tells you whether you were right.*"
+    if hint:
+        text += f"\n\n<details><summary>Hint</summary>\n\n{hint.strip()}\n\n</details>"
+    return _tagged(md(text), "predict")
+
+
+def exercise(title: str, task: str, src: str):
+    """A 🧪 exercise: markdown brief + a TODO code cell (tagged "exercise"). Follow it with solution()."""
+    return [_tagged(md(f"### 🧪 Your turn: {title}\n\n{task.strip()}"), "exercise-intro"),
+            _tagged(code(src), "exercise")]
+
+
+def glossary(rows: list[tuple[str, str]]):
+    body = "\n".join(f"| `{n}` | {d} |" for n, d in rows)
+    return _tagged(md("#### 📖 Names used in this notebook\n\n| Name | What it holds |\n|---|---|\n" + body), "glossary")
 
 
 def setup_cell():

@@ -39,6 +39,22 @@ Each notebook opens in Colab from its badge. The badges point at
 `github.com/baluragala/genai_eval_safety_reliability` on `main`, so they only work once this repo has been
 pushed there. Until then, upload the `.ipynb` to Colab (File → Upload notebook).
 
+### How every notebook is laid out
+
+Each notebook opens with **the scenario**, **what's already built** and **this notebook's problem and objectives**.
+After that, every step has the same shape:
+
+| Part | What it gives the learner |
+|---|---|
+| ✋ **Predict first** (before key steps) | commit to a guess before seeing the output |
+| **Why this step** + 📥 **Inputs** | the purpose of the step, and where each input comes from (file, earlier cell, config, live model) |
+| code | the step itself |
+| 🔍 **Reading the output** | what each part of the output means, what to expect and why, with branches for live variation; depth in a click-to-expand dropdown |
+| 💡 **explanation cell** | reasoning **computed from the learner's own run** (`al.explain.*`), so it's correct whatever the model did |
+| ➡️ **So what** | how the step connects to the next one |
+
+`tests/test_notebooks.py` enforces this layout on every cell.
+
 ### What each one covers
 
 * **01 · Evaluation.** Evaluation dimensions (success, tool correctness, trajectory, cost, latency, robustness,

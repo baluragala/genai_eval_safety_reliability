@@ -1,6 +1,7 @@
 # C9-W4-S1: Instructor guide
 
 **Deck:** https://claude.ai/artifact/3wfgdBNhmA1zRVAjp5Tn9A (26 slides, speaker notes on every slide)
+
 ## Evaluation, Safety & Reliability in Agentic Systems · 120 minutes
 
 One running case, six notebooks. The **Acme Outfitters support agent** is an OpenAI tool-calling agent
@@ -8,9 +9,15 @@ that looks up orders, reads the help centre, issues refunds, sends email, keeps 
 customers and escalates to humans. Learners measure it (01), debug it (02), attack it (03), guard it (04),
 break its dependencies (05) and put humans around it (06).
 
-The runtime (`agentlab`) is embedded in every notebook's setup cell, so learners need only an OpenAI key.
+Each notebook's setup cell clones this repo from GitHub and imports the runtime (`agentlab`), so learners need only an OpenAI key and network access to GitHub.
 
 ---
+
+## Using the notebook format live
+
+- **✋ Predict first:** pause and take a show of hands (or a chat poll) before running the next cell. Twenty seconds is enough; the point is commitment, not accuracy.
+- **🔍 Reading the output:** read the bullets aloud only the first time a table shape appears. Leave the ▸ dropdowns for self-study.
+- **💡 explanation cells:** these are the safest thing to narrate from, because they describe the room's actual run. The markdown never states live numbers.
 
 ## Before the session
 

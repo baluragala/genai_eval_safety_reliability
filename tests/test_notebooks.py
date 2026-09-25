@@ -44,3 +44,44 @@ def test_no_key_anywhere_in_repo():
     for p in ROOT.rglob("*"):
         if p.is_file() and ".venv" not in p.parts and p.suffix in {".py", ".md", ".ipynb", ".txt", ".example"}:
             assert not re.search(r"sk-(proj-)?[A-Za-z0-9_-]{20,}", p.read_text(errors="ignore")), p
+
+
+HEADER_CELLS = 6   # title, scenario, context, setup, key markdown, key check
+
+
+def _tag(c):
+    return (c.get("metadata", {}).get("tags") or [None])[0]
+
+
+@pytest.mark.parametrize("path", NBS, ids=lambda p: p.name)
+def test_every_step_follows_the_pattern(path):
+    """predict? → step-intro (why + 📥 inputs) → step code → 🔍 reading → explain? → so-what? ; exercises → solution."""
+    cells = nbformat.read(path, as_version=4).cells[HEADER_CELLS:]
+    tags = [_tag(c) for c in cells]
+    for i, c in enumerate(cells):
+        t = tags[i]
+        where = f"{path.name} cell {i + HEADER_CELLS}: {c.source[:60]!r}"
+        if c.cell_type == "code":
+            assert t in {"step", "explain", "exercise", "solution"}, f"untagged code cell · {where}"
+        if t == "step":
+            assert tags[i - 1] == "step-intro", f"step code without a step() intro · {where}"
+            assert tags[i + 1] == "reading", f"step code without a reading() after it · {where}"
+        if t == "step-intro":
+            assert "**Why this step:**" in c.source and "📥 Inputs" in c.source, where
+        if t == "reading":
+            assert "🔍 Reading the output" in c.source, where
+        if t == "explain":
+            assert tags[i - 1] in {"reading", "explain"}, f"explain() must follow reading() · {where}"
+        if t == "exercise":
+            assert tags[i - 1] == "exercise-intro" and tags[i + 1] == "solution", where
+        if t == "predict":
+            assert tags[i + 1] == "step-intro", f"predict() must come right before a step() · {where}"
+
+
+@pytest.mark.parametrize("path", NBS, ids=lambda p: p.name)
+def test_notebook_has_predictions_glossary_and_explanations(path):
+    cells = nbformat.read(path, as_version=4).cells
+    tags = [_tag(c) for c in cells]
+    assert tags.count("predict") >= 3, "at least three predict-first prompts"
+    assert "glossary" in tags
+    assert tags.count("explain") >= 3, "at least three explanations computed from the learner's run"
