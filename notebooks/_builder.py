@@ -1,19 +1,17 @@
-"""A small cell DSL, plus the setup cell that ships `agentlab` inside every notebook.
+"""A small cell DSL, plus the setup cell that fetches `agentlab` from GitHub.
 
 Each notebook is authored as a Python module (`nbXX.py`) exposing NOTEBOOK
 (the filename), TITLE, MINUTES and CELLS. `scripts/build_notebooks.py` turns
 them into .ipynb files.
 
-The setup cell carries the whole `src/agentlab` package as a base64 zip and
-unpacks it next to the notebook. That way a fresh Colab runtime needs no
-clone and no pip install of this repo, only an OpenAI key.
+The setup cell makes `src/agentlab` importable. Inside a checkout of this repo
+(a maintainer's machine, the test runner) it uses that checkout's `src/`, so
+local edits take effect without a push. Anywhere else (a fresh Colab) it
+shallow-clones the repo from GitHub, or pulls if the clone already exists.
 """
 from __future__ import annotations
 
-import base64
-import io
 import pathlib
-import zipfile
 
 import nbformat
 
@@ -47,35 +45,35 @@ def solution(src: str):
     return form("✅ Solution (click to reveal)", src)
 
 
-def package_blob() -> str:
-    buf = io.BytesIO()
-    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
-        for f in sorted(SRC.glob("*.py")):
-            info = zipfile.ZipInfo(f"agentlab/{f.name}", date_time=(2026, 1, 1, 0, 0, 0))
-            z.writestr(info, f.read_text())
-    return base64.b64encode(buf.getvalue()).decode()
-
-
 def setup_cell():
-    blob = package_blob()
     src = f'''
-# Installs the OpenAI SDK and unpacks the lab runtime (`agentlab`) next to this notebook.
-# Nothing here needs editing. The runtime's source is readable in ./agentlab/ afterwards.
-import sys, subprocess, importlib, base64, io, zipfile, pathlib
+# Makes the lab runtime (`agentlab`) importable, and installs the OpenAI SDK if it's missing.
+# In Colab this clones {GITHUB_SLUG} (branch {GITHUB_BRANCH}); inside a local checkout it uses that checkout.
+import sys, subprocess, pathlib
+REPO_URL = "https://github.com/{GITHUB_SLUG}.git"
+BRANCH = "{GITHUB_BRANCH}"
 try:
     import openai  # noqa: F401
 except ImportError:
     subprocess.run([sys.executable, "-m", "pip", "install", "-q", "openai>=1.40", "pandas", "matplotlib"], check=True)
-_BLOB = "{blob}"
-with zipfile.ZipFile(io.BytesIO(base64.b64decode(_BLOB))) as _z:
-    _z.extractall(pathlib.Path.cwd())
-sys.path.insert(0, str(pathlib.Path.cwd()))
+
+_here = pathlib.Path.cwd().resolve()
+_src = next((p / "src" for p in [_here, *_here.parents] if (p / "src" / "agentlab" / "__init__.py").exists()), None)
+if _src is None:
+    _base = pathlib.Path("/content") if pathlib.Path("/content").is_dir() else _here
+    _repo = _base / "{GITHUB_SLUG.split('/')[1]}"
+    if not (_repo / ".git").exists():
+        subprocess.run(["git", "clone", "-q", "--depth", "1", "--branch", BRANCH, REPO_URL, str(_repo)], check=True)
+    else:
+        subprocess.run(["git", "-C", str(_repo), "pull", "-q", "--ff-only"], check=False)
+    _src = _repo / "src"
+sys.path.insert(0, str(_src))
 for _m in [m for m in sys.modules if m == "agentlab" or m.startswith("agentlab.")]:
     del sys.modules[_m]
 import agentlab as al
 import pandas as pd
 pd.set_option("display.max_colwidth", 90); pd.set_option("display.width", 200)
-print(f"agentlab {{al.__version__}} ready · model under test: {{al.config.MODEL}}")
+print(f"agentlab {{al.__version__}} ready from {{_src}} · model under test: {{al.config.MODEL}}")
 '''
     return form("⚙️ Setup: run this first", src)
 

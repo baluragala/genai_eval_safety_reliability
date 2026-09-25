@@ -72,9 +72,11 @@ all call the real API.
 * **Colab:** 🔑 panel → *Add new secret* → `OPENAI_API_KEY` → turn on **Notebook access**.
 * **Local:** `export OPENAI_API_KEY=...`, then `pip install -r requirements.txt` and `jupyter lab`.
 
-You don't need to clone or `pip install` anything else. Each notebook's first cell unpacks the lab runtime
-(`agentlab`, from `src/agentlab/`). Every call goes through a **spend meter capped at $1.00 per notebook**
-(`al.METER`). A full run of all six costs a few cents with `gpt-4o-mini`; the instructor guide has the estimate.
+You don't need to clone anything by hand. Each notebook's setup cell shallow-clones this repo (branch `main`)
+into the Colab runtime and imports the lab runtime (`agentlab`) from its `src/`. Run inside a local checkout,
+it uses that checkout's `src/` instead, so local edits take effect without a push.
+
+Every call goes through a **spend meter capped at $1.00 per notebook** (`al.METER`). A full run of all six costs a few cents with `gpt-4o-mini`; the instructor guide has the estimate.
 
 Model names and prices live in **one file**, `src/agentlab/config.py`. Check them against the current OpenAI
 docs before the session, then rebuild the notebooks (below).
@@ -82,7 +84,7 @@ docs before the session, then rebuild the notebooks (below).
 ## Repository layout
 
 ```
-src/agentlab/        the runtime (inlined into every notebook's setup cell)
+src/agentlab/        the runtime (each notebook's setup cell clones the repo and imports it)
   agent.py           agent loop, Trace, guard hooks, checkpoint/resume, human approval
   world.py tools.py  Acme Outfitters, tools, provenance (trusted / untrusted)
   tasks.py evals.py  golden set, attack set, oracle, metrics, pass@k / pass^k, red team
