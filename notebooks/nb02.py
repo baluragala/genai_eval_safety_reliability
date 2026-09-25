@@ -5,6 +5,22 @@ NOTEBOOK = "02_traces_and_failures.ipynb"
 TITLE = "02 · Analysing traces: when the agent is wrong, why is it wrong?"
 MINUTES = 20
 
+CONTEXT = {
+    "problem": ("Notebook 01's oracle tells us **that** a run failed. It doesn't tell us **why**, and \"the model got it "
+                "wrong\" isn't something you can fix. To fix an agent you have to localise the failure to one step and one "
+                "component: the prompt, the plan, a tool schema, the loop, or the code that reads tool results. "
+                "The trace is the evidence."),
+    "start": ("From Notebook 01: the golden set, the oracle and the `Trace` object. We keep the same agent and tools."),
+    "learn": ["Name the five common agent failures: reasoning failure, planning breakdown, infinite loop, tool misuse, silent failure",
+              "Read a trace step by step and point to the step and component that went wrong",
+              "Turn each diagnosis into an automatic **detector** that runs over any trace",
+              "Provoke real failures from a misconfigured live agent and diagnose them with the same detectors"],
+    "do": ("Classify a gallery of six traces (one healthy, five broken), write the detectors, then break the live agent on "
+           "purpose (a declined payment, an outage, a sloppy prompt) and see which failures the real model produces."),
+    "given": ("Given: the failure gallery (built by hand so every class appears) and the agent. "
+              "You write: the classification of each trace, and the detectors."),
+}
+
 CELLS = [
 md("""
 ## From "it failed" to "this component failed"

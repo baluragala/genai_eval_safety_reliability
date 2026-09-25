@@ -12,6 +12,14 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 NBS = sorted((ROOT / "notebooks").glob("*.ipynb"))
 
 
+@pytest.mark.parametrize("path", NBS, ids=lambda p: p.name)
+def test_notebook_opens_with_context(path):
+    nb = nbformat.read(path, as_version=4)
+    assert "The scenario" in nb.cells[1].source and "already built" in nb.cells[1].source
+    for part in ("The problem", "starting from", "you'll be able to", "What you'll do", "Given vs. you write"):
+        assert part in nb.cells[2].source, part
+
+
 def test_all_notebooks_built():
     assert len(NBS) == len(MODULES)
 
@@ -24,9 +32,9 @@ def test_notebook_executes(path):
 @pytest.mark.parametrize("path", NBS, ids=lambda p: p.name)
 def test_notebook_has_setup_key_cell_and_no_key(path):
     nb = nbformat.read(path, as_version=4)
-    setup = nb.cells[1].source
+    setup = nb.cells[3].source
     assert "git\", \"clone" in setup and "baluragala/genai_eval_safety_reliability" in setup
-    assert "_BLOB" not in setup and "check_connection" in nb.cells[3].source
+    assert "_BLOB" not in setup and "check_connection" in nb.cells[5].source
     text = path.read_text()
     assert not re.search(r"sk-[A-Za-z0-9_-]{20,}", text)
     assert all(not c.get("outputs") for c in nb.cells if c.cell_type == "code"), "commit notebooks without outputs"

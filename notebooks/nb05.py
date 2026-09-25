@@ -5,6 +5,24 @@ NOTEBOOK = "05_reliability.ipynb"
 TITLE = "05 · Reliability engineering: keeping the agent working when the world misbehaves"
 MINUTES = 25
 
+CONTEXT = {
+    "problem": ("A correct, guarded agent still depends on systems that time out, rate-limit, return 503s and crash halfway "
+                "through a refund. In production, **reliability failures turn into correctness failures**: a lost refund, "
+                "a double refund, a customer stuck in a loop. We need the agent to keep working, or fail honestly, when the "
+                "world misbehaves."),
+    "start": ("From Notebooks 01 and 04: the golden set and oracle for measuring success, and the guards (a loop guard reappears here). "
+              "Tools are now wrapped in a **fault injector** that fails a seeded share of calls."),
+    "learn": ["Tell retryable faults from permanent ones, and retry with exponential backoff and jitter within a deadline",
+              "Explain why writes need **idempotency keys** before they can be retried or replayed",
+              "Checkpoint agent state and resume after a crash without doing a side effect twice",
+              "Use circuit breakers, fallbacks and graceful degradation, plus step and budget limits",
+              "Run a chaos experiment and compare configurations by success rate and latency"],
+    "do": ("Break the world on purpose (timeouts, 429s, 503s, crashes), then add one pattern at a time as an executor wrapper "
+           "and measure the difference. It ends with a chaos experiment across fault rates."),
+    "given": ("Given: the fault injector, a virtual clock (so backoff waits cost no class time) and reference wrappers "
+              "in `agentlab.reliability`. You write: a retry function, and you assemble the wrapper stack."),
+}
+
 CELLS = [
 md("""
 ## Where we are

@@ -5,6 +5,25 @@ NOTEBOOK = "01_evaluating_agents.ipynb"
 TITLE = "01 · Evaluating agentic systems: what does \"correct\" even mean?"
 MINUTES = 20
 
+CONTEXT = {
+    "problem": ("The agent \"works\" because we watched it handle a few tickets. That isn't evidence. Before it touches real "
+                "money we need a repeatable way to say how often it does the right thing, at what cost and speed, and how "
+                "well it copes with tickets nobody wrote in advance. A chatbot's reply can be graded on its text. An agent "
+                "**acts**, so it has to be graded on what it did."),
+    "start": ("A working agent (above) and nothing to measure it with. This is the first notebook of the session; "
+              "nothing from the other notebooks is needed."),
+    "learn": ["Define meaningful evaluation dimensions for an agent: success, tool correctness, trajectory, cost, latency, robustness, safety",
+              "Build a golden set scored by an **oracle** that reads the world state, not the agent's words",
+              "Write trace-based checks on *how* the agent reached its answer",
+              "Use **LLM-as-judge** with a rubric, and calibrate the judge against trusted labels (agreement, Cohen's κ, false passes)",
+              "Use **simulation-based testing** (perturbed tickets, LLM-played customers) and measure consistency with pass@k vs pass^k"],
+    "do": ("Run the agent on a 10-ticket golden set, read its traces, grade it with an LLM judge (and grade the judge), "
+           "then stress it with simulated customers."),
+    "given": ("Given: the agent, the world, the golden set, the oracle (`al.check_task`) and the judge prompt. "
+              "You write: trajectory checks, and you interpret every number. Nothing in the text predicts results; "
+              "they come from your live run."),
+}
+
 CELLS = [
 md("""
 ## Where we are
@@ -12,10 +31,7 @@ md("""
 You've built agents with loops, plans, memory, tools and more than one agent. This session asks what comes next:
 **is the agent correct, is it safe, and will it keep working?**
 
-Every notebook today uses the same system:
-
-> **Acme Outfitters support agent.** It's an OpenAI tool-calling agent that looks up orders, reads the help centre,
-> issues refunds, emails customers, keeps long-term notes, and hands off to humans.
+Every notebook today tests the same Acme agent:
 
 | Notebook | Block | Question |
 |---|---|---|

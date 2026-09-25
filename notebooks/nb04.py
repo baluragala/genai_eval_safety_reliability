@@ -5,6 +5,22 @@ NOTEBOOK = "04_guardrails.ipynb"
 TITLE = "04 · Guardrails: defence in depth, one layer at a time"
 MINUTES = 20
 
+CONTEXT = {
+    "problem": ("Notebook 03 showed the agent can be talked into refunding the wrong order, emailing customer data to "
+                "strangers and running code. We need defences that hold **even when the model is fooled**, without breaking "
+                "the legitimate tickets it handles today."),
+    "start": ("From Notebook 03: the red team (six attacks) and its baseline attack success rate. "
+              "From Notebook 01: the golden set, which we re-run to catch over-blocking."),
+    "learn": ["Design guardrails as layers: input, context, **action**, oversight, output",
+              "Implement permissioning (least privilege), sandboxed tool execution, and policy checks grounded in the system of record",
+              "Stop prompt injection, memory poisoning and unsafe tool execution, and show which layer stops which attack",
+              "Measure the safety/utility trade-off: attack success rate vs golden-set success, false positives and cost"],
+    "do": ("Write each guard as a small class, add it to the agent, and re-run the same red team after every layer, "
+           "keeping a running scoreboard."),
+    "given": ("Given: the `al.Guard` hook interface and reference implementations in `agentlab.guards` to compare against. "
+              "You write: each guard layer (guided coding)."),
+}
+
 CELLS = [
 md("""
 ## Where we are

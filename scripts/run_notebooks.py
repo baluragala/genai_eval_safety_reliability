@@ -19,7 +19,7 @@ al.llm.set_client(FakeOpenAI())"""
 def run(path: pathlib.Path, live: bool, timeout=900):
     nb = nbformat.read(path, as_version=4)
     if not live:
-        nb.cells.insert(2, nbformat.v4.new_code_cell(FAKE))
+        nb.cells.insert(4, nbformat.v4.new_code_cell(FAKE))
     workdir = ROOT / ("reference_runs" if live else ".nbrun")
     workdir.mkdir(exist_ok=True)
     NotebookClient(nb, timeout=timeout, kernel_name="python3",

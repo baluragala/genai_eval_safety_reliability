@@ -5,6 +5,22 @@ NOTEBOOK = "06_oversight_and_wrapup.ipynb"
 TITLE = "06 · Operational trust & oversight: keeping humans in the loop"
 MINUTES = 15
 
+CONTEXT = {
+    "problem": ("Guardrails and reliability patterns are code. Putting an agent in front of customers also takes "
+                "**operational trust**: deciding which actions a human must approve, recording what happened in a way nobody "
+                "can quietly alter, being able to switch capabilities off in an incident, and having evidence that it's ready to ship."),
+    "start": ("Everything from Notebooks 01–05: the evaluation harness, the red team, the guardrail stack and the reliable "
+              "executor. Here they come together into one hardened agent."),
+    "learn": ["Implement human-in-the-loop approval (approve / reject / edit) that pauses and resumes a run",
+              "Choose the level of oversight per action from its risk: auto, notify, approve, block",
+              "Keep a tamper-evident audit log and use a kill switch",
+              "Combine evaluation, safety and chaos results in a **release gate** that compares the baseline and hardened agents"],
+    "do": ("Pause a refund for human review, build an escalation matrix, audit a run and tamper with the log, then score "
+           "baseline vs hardened against a release gate. It ends with the wrap-up and Q&A."),
+    "given": ("Given: `ApprovalGate`, `AuditLog`, `KillSwitch` and `release_gate` in `agentlab`. "
+              "You decide: the thresholds, and whether the agent ships."),
+}
+
 CELLS = [
 md("""
 ## Where we are
